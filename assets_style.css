@@ -170,7 +170,9 @@ details{margin-top:8px}
 .modal-content .note { margin-top: 8px; }
 /* Make nav stick and add a subtle blur background while scrolling */
 .nav{
-  position: sticky; top: 0; z-index: 999;
+  position: sticky;
+  top: 0;
+  z-index: 999;
   background: linear-gradient(180deg, rgba(12,21,48,.70), rgba(12,21,48,.40));
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(230, 238, 255, .12);
@@ -179,11 +181,29 @@ details{margin-top:8px}
   color: #fff;
   border-bottom: 2px solid var(--brand);
   padding-bottom: 2px;
-.skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
-.skip-link:focus{left:12px;top:12px;width:auto;height:auto;background:#fff;color:#0c1530;
-  padding:10px 12px;border-radius:10px;box-shadow:0 6px 20px rgba(24,124,255,.2)}
-  
+} /* ← the missing closing brace */
+
+/* Accessible skip link */
+.skip-link {
+  position:absolute;
+  left:-9999px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;
 }
+.skip-link:focus {
+  left:12px;
+  top:12px;
+  width:auto;
+  height:auto;
+  background:#fff;
+  color:#0c1530;
+  padding:10px 12px;
+  border-radius:10px;
+  box-shadow:0 6px 20px rgba(24,124,255,.2);
+}
+
 .modal-overlay[hidden] { display: none !important; }
 
 /* === Hero Fade-in Animation === */
@@ -203,4 +223,5 @@ details{margin-top:8px}
     transform: translateY(0);
   }
 }
+
 
