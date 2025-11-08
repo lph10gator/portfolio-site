@@ -179,5 +179,10 @@ details{margin-top:8px}
   color: #fff;
   border-bottom: 2px solid var(--brand);
   padding-bottom: 2px;
+.skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+.skip-link:focus{left:12px;top:12px;width:auto;height:auto;background:#fff;color:#0c1530;
+  padding:10px 12px;border-radius:10px;box-shadow:0 6px 20px rgba(24,124,255,.2)}
+  
 }
 .modal-overlay[hidden] { display: none !important; }
+
