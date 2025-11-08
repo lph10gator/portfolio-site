@@ -55,24 +55,26 @@ document.addEventListener('keydown', (e) => {
 });
 
 /* ========= Sticky Mini-Nav (Scroll-Spy) ========= */
-const sections = document.querySelectorAll("section[id]");
-const navLinks = document.querySelectorAll(".nav-link");
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
 
-// Intersection Observer handles highlighting and aria-current
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    const link = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+    const link = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+    if (!link) return;
     if (entry.isIntersecting) {
       navLinks.forEach(a => {
-        a.classList.remove("active");
-        a.removeAttribute("aria-current");
+        a.classList.remove('active');
+        a.removeAttribute('aria-current');
       });
-      link.classList.add("active");
-      link.setAttribute("aria-current", "page");
+      link.classList.add('active');
+      link.setAttribute('aria-current', 'page');
     }
   });
 }, { threshold: 0.5 });
 
 sections.forEach(section => observer.observe(section));
+
+
 
 
