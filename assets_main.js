@@ -44,28 +44,57 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && !overlay.hidden) closeModal();
 });
 
-/* ========= Sticky Mini-Nav (Scroll-Spy) ========= */
-const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+/* ========= Fixed-header mobile toggle ========= */
+const fixedToggle = document.querySelector('.top-nav .nav-toggle');
+const fixedMenu   = document.querySelector('.top-nav .nav-container');
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    const link = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
-    if (!link) return;
-    if (entry.isIntersecting) {
-      navLinks.forEach(a => {
-        a.classList.remove('active');
-        a.removeAttribute('aria-current');
-      });
-      link.classList.add('active');
-      link.setAttribute('aria-current', 'page');
+if (fixedToggle && fixedMenu) {
+  fixedToggle.addEventListener('click', () => {
+    const open = fixedMenu.classList.toggle('show');
+    fixedToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  // Close the menu when a link is chosen
+  fixedMenu.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', () => {
+      fixedMenu.classList.remove('show');
+      fixedToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Reset on resize back to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      fixedMenu.classList.remove('show');
+      fixedToggle.setAttribute('aria-expanded', 'false');
     }
   });
-}, { threshold: 0.5 });
+}
 
-sections.forEach(section => observer.observe(section));
+/* ========= Sticky Mini-Nav (Scroll-Spy) for fixed header ========= */
+const sections = document.querySelectorAll('section[id]');
+const spyLinks = document.querySelectorAll('.top-nav a[href^="#"]');
 
+if (sections.length && spyLinks.length) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = document.querySelector(`.top-nav a[href="#${entry.target.id}"]`);
+      if (!link) return;
 
+      if (entry.isIntersecting) {
+        spyLinks.forEach(a => {
+          a.classList.remove('active');
+          a.removeAttribute('aria-current');
+        });
+        link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
+      }
+    });
+  }, {
+    threshold: 0.5
+    // Optionally account for fixed header height:
+    // rootMargin: '-70px 0px -30% 0px'
+  });
 
-
-
+  sections.forEach(section => observer.observe(section));
+}
