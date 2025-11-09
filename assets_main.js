@@ -4,16 +4,6 @@ const modalContent = document.getElementById('modal-content');
 // Force closed on load (belt-and-suspenders)
 if (overlay) overlay.hidden = true;
 
-// Mobile nav toggle
-const toggle = document.querySelector('.nav-toggle');
-const links = document.querySelector('.nav-links');
-if (toggle) {
-  toggle.addEventListener('click', () => {
-    const open = links.classList.toggle('show');
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-}
-
 // Footer year
 const y = document.getElementById('y');
 if (y) y.textContent = new Date().getFullYear();
@@ -74,6 +64,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 
 sections.forEach(section => observer.observe(section));
+
 
 
 
