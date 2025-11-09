@@ -45,11 +45,6 @@ body{
   width:100%; max-width:1100px; margin:0 auto; padding:18px 20px;
   display:flex; align-items:center; justify-content:space-between;
 }
-.logo{color:#fff; font-weight:800; letter-spacing:.5px; text-decoration:none}
-.nav-links{list-style:none; display:flex; gap:22px; margin:0; padding:0}
-.nav-links a{color:#dbe7ff; text-decoration:none}
-.nav-links a:hover{text-decoration:underline}
-.nav-toggle{display:none; background:none; border:0; color:#fff; font-size:26px; cursor:pointer}
 
 .hero-inner{
   max-width:1100px; margin:0 auto 64px; padding:0 20px; text-align:center;
@@ -266,3 +261,4 @@ body {
   scroll-behavior: smooth;
   margin-top: 70px;
 }
+
