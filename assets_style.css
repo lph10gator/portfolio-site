@@ -80,10 +80,16 @@ h2{font-size: clamp(24px, 4vw, 36px); margin:0 0 18px}
 }
 .project-head{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
 .project h3{margin:0}
-.pill{
-  background:linear-gradient(90deg, var(--brand), var(--brand-2)); color:#fff;
-  padding:6px 10px; border-radius:999px; font-size:12px; letter-spacing:.2px
+.pill {
+  background: transparent;      /* remove the blue background */
+  color: #555;                  /* softer gray text */
+  font-weight: 500;             /* keep readable but not loud */
+  border-radius: 6px;           /* optional: keep a touch of rounding */
+  padding: 4px 6px;             /* subtle spacing */
+  font-size: 12px;
+  letter-spacing: .2px;
 }
+
 .metrics{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:14px; margin:12px 0 6px}
 .metric{
   background:linear-gradient(180deg,#f7faff,#eef4ff); border:1px solid #e8efff; border-radius:14px; padding:10px 12px
@@ -223,5 +229,6 @@ details{margin-top:8px}
     transform: translateY(0);
   }
 }
+
 
 
