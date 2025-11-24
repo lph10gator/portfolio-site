@@ -1,0 +1,35 @@
+# Site settings
+title: Linton McCracken
+description: Data Engineer & Solution Architect | Building AI Automation
+url: "https://lintonmccracken.com"
+baseurl: ""
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+# Exclude from processing
+exclude:
+  - README.md
+  - CNAME
+  - Gemfile
+  - Gemfile.lock
+
+# Collections for organizing content
+collections:
+  posts:
+    output: true
+    permalink: /build-log/:year/:month/:title/
+
+# Default front matter
+defaults:
+  - scope:
+      path: "_posts"
+      type: "posts"
+    values:
+      layout: "post"
+
+# Plugins (GitHub Pages supported)
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
