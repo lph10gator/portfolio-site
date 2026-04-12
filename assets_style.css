@@ -263,5 +263,29 @@ body{ margin-top:70px; }
   }
 }
 
+/* Markdown table styles */
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 15px;
+}
+.post-content table th {
+  background: #f1f5ff;
+  color: #0c1530;
+  font-weight: 700;
+  padding: 10px 14px;
+  text-align: left;
+  border: 1px solid #e1e9ff;
+}
+.post-content table td {
+  padding: 10px 14px;
+  border: 1px solid #e8efff;
+  color: #475569;
+}
+.post-content table tr:nth-child(even) {
+  background: #f7faff;
+}
+
 /* Kill the old hero nav if it still exists */
 .hero .nav { display:none !important; }
