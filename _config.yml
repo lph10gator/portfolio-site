@@ -8,7 +8,8 @@ baseurl: ""
 markdown: kramdown
 highlighter: rouge
 
-# Exclude from processing
+# Exclude from processing 
+
 exclude:
   - README.md
   - CNAME
