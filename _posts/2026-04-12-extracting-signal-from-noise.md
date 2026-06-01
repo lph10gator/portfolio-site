@@ -2,7 +2,7 @@
 layout: post
 title: "From Requirements Matching to Competitive Intelligence: The Same Problem, Better Tools"
 date: 2026-04-12
-tags: [n8n, Python, pgvector, LLM, Ollama, PostgreSQL, NLP, RAG, automation, competitive-intelligence]
+tags: [n8n, Python, pgvector, LLM, Ollama, PostgreSQL, NLP, RAG, semantic-search, automation, competitive-intelligence]
 excerpt: "Every role I've had has been the same problem with more powerful tools. I didn't stumble into AI pipeline work — it found me."
 ---
 
@@ -14,7 +14,7 @@ I didn't stumble into AI pipeline work. It found me — because I've been solvin
 
 ## The Pattern I Didn't See Coming
 
-Back in 2017, I was building Access databases and VBA macros for Navy and USMC clients. The work looked simple on the surface: take siloed data that no one could make sense of, clean it up, connect it, and give leadership visibility they didn't have before.
+In my earlier contract years I was building Access databases and VBA macros for Navy and USMC clients. The work looked simple on the surface: take siloed data that no one could make sense of, clean it up, connect it, and give leadership visibility they didn't have before.
 
 A $628M budget trapped in disconnected Excel files. 170 million data points across depot systems with no unified view. Lessons learned that lived in email threads and died there.
 
@@ -24,51 +24,55 @@ VBA and Access were the right tools for that scale. I used them well. But I was 
 
 ---
 
-## Millennium: NLP at Scale
+## NP2: The Same Problem, Bigger Stakes
 
-By 2023 I was working on something bigger: the Navy Personnel and Pay (NP2) program, a federal modernization effort processing 10,000+ requirements that needed to be matched to test cases.
+For most of my time at Millennium I worked the Navy Personnel and Pay (NP2) program — a federal modernization effort with a master set of roughly **30,000 requirements**, depending on how you counted them. I came in as a test analyst and, before long, became the de-facto data person for the testing team.
 
-The manual process took analysts 3–4 months per cycle. My job was to make that faster.
+Working that data, I found the gap: about **4,000 requirements** had never been matched to a test case. They'd slipped through. On a program that size, closing that gap by hand was a 3–4 month slog.
 
-I built a Python-based NLP platform that applied:
-- **Jaccard similarity scoring** to measure requirement overlap
+In **late 2025** I automated it. I built a Python NLP pipeline that applied:
+
+- **Jaccard similarity scoring** to measure requirement-to-test-case overlap
 - **Hierarchical clustering** to group related requirements
 - **Context-aware topic extraction** to pull meaning from dense technical language
-- **Adaptive acronym harvesting** — 633 Navy-specific terms with 98% extraction accuracy
+- **Adaptive acronym harvesting** — 633 Navy-specific terms at 98% extraction accuracy
 
-The result: validation time dropped from 3–4 months to under 2 hours. A 98% reduction. Analysts validated requirements 50% faster. Traceability confidence went from 60–70% to 75–85%.
+The result: matching those ~4,000 orphaned requirements dropped from a 3–4 month manual effort to under 2 hours — a **98% reduction**. Analysts validated roughly **50% faster**. Traceability confidence climbed from **60–70% to 75–85%**.
 
-I called it an NLP automation platform at the time. Looking back, I'd call it something else.
+*(The work ran on proprietary U.S. Navy data. I can describe the architecture and the results — but not the source data itself.)*
+
+I called it an NLP automation platform at the time. Looking back, I'd describe it a little differently.
 
 ---
 
 ## What I'd Call It Now
 
-What I built at Millennium was a primitive RAG system.
+Today I'd recognize what I built as the **retrieval-and-ranking layer that sits at the front of every modern RAG and semantic-search system** — I was solving it by hand before vector databases made it easy.
 
-I didn't have that vocabulary then. But the architecture was the same:
+The machinery was the same kind RAG depends on:
+
 - Ingest a collection of documents (requirements)
-- Extract meaning and structure from text
+- Extract meaning and structure from dense technical text
 - Score similarity and relevance
-- Surface the right matches to a human analyst
+- Surface the best matches to a human analyst
 
-That's retrieval-augmented generation without the generation step. The retrieval and augmentation were all there.
+What I *didn't* have was the generation step — no LLM producing output from the retrieved context. That came later, at Autyvia. But the retrieval half — find the most relevant items by similarity — is exactly what I'd soon be doing with vector embeddings instead of hand-tuned Jaccard scoring.
 
-The tooling was 2023-era Python and NLP libraries. The concept was timeless.
+The tools were classical Python NLP libraries. The retrieval problem was timeless.
 
 ---
 
 ## Autyvia: The Same Problem, Modern Stack
 
-In late 2025 I joined Autyvia, an architecture, engineering, and construction (AEC) intelligence startup, to build their competitive intelligence pipeline from the ground up.
+Right after the NP2 program wound down, I joined Autyvia in December 2025 — an architecture, engineering, and construction (AEC) intelligence startup — to build their competitive intelligence pipeline from the ground up.
 
 The problem statement was immediately familiar: **extract signal from noise at scale and eliminate manual work.**
 
 This time the content isn't Navy requirements — it's 500+ weekly content items from RSS feeds, YouTube channels, podcasts, and industry association websites. The extraction target isn't test case matches — it's companies, people, pain points, technology trends, and newsletter hooks.
 
-The architecture maps directly:
+The approach maps directly:
 
-| Millennium (2023) | Autyvia (2025–present) |
+| NP2 — classical NLP (2025) | Autyvia — LLM stack (2025–present) |
 |---|---|
 | Python NLP pipeline | Python + n8n orchestration |
 | Jaccard similarity | pgvector cosine similarity |
@@ -76,9 +80,9 @@ The architecture maps directly:
 | Domain acronym extraction | LLM entity extraction (Ollama/Llama 3.1) |
 | Manual analyst review | Automated delivery to SharePoint + Teams |
 
-The concepts transferred directly. The implementation evolved.
+The concepts transferred directly. The implementation evolved — and this time I added the generation and entity-extraction step the earlier system never had.
 
-What used to require hand-tuned similarity functions now uses vector embeddings. What used to require manual review pipelines now runs on a schedule and delivers to the editorial team automatically. What used to take 3–4 months now runs every Monday morning.
+What used to require hand-tuned similarity functions now uses vector embeddings. What used to require manual review now runs on a schedule and delivers to the editorial team automatically.
 
 ---
 
@@ -101,7 +105,7 @@ Zero manual steps in the weekly delivery cycle.
 
 VBA/Access → Python NLP → LLM pipelines with pgvector.
 
-Each transition felt like learning something new. Looking back, it was the same skill deepening — pattern recognition, extraction, automation — applied to increasingly complex problems with increasingly powerful tools.
+Each transition felt like learning something new. Looking back, it was the same skill deepening — pattern recognition, extraction, automation — applied to increasingly complex problems with increasingly powerful tools. The problem never changed. The tools finally caught up to it.
 
 If you're looking for someone who thinks this way about data problems — and has the production pipeline to show for it — I'm open to conversations about what's next.
 
